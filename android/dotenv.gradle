@@ -24,6 +24,7 @@ def readDotEnv = {
 
     project.ext.set("env", readFile("thejump.env"))
     project.ext.set("envlive", readFile("thejumplive.env"))
+    project.ext.set("envstaging", readFile("thejumpstaging.env"))
 }
 
 readDotEnv()
@@ -42,6 +43,11 @@ if (project.ext.has("env")) {
             project.ext.get("envlive").each { k, v ->
                 def escaped = v.replaceAll("%","\\\\u0025")
                 buildConfigField "String","live" + k , "\"$v\""
+                resValue "string", k, "\"$escaped\""
+            }
+              project.ext.get("envstaging").each { k, v ->
+                def escaped = v.replaceAll("%","\\\\u0025")
+                buildConfigField "String","staging" + k , "\"$v\""
                 resValue "string", k, "\"$escaped\""
             }
         }
