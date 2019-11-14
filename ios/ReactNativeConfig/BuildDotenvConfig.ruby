@@ -11,7 +11,7 @@ else
   file = ".env"
 end
 
-puts "Reading env from #{file}"
+puts "Reading env from #{file} - #{File.join(Dir.pwd, "../../../#{file}")}"
 
 dotenv = begin
   # https://regex101.com/r/SLdbes/1
